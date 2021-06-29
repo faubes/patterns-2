@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="patterner"
+config/description="Implementation of Pattern II, a multiplayer pattern guessing game by Sid Sackson.
+
+https://en.wikipedia.org/wiki/Patterns_II
+
+A Godot practice project. Learning about GUIs, esp: crossplatform design
+
+The goal:
+
+Two-mode game with:
+1) pattern drawing & saving
+2) pattern guessing
+
+Ultimately want to give it a mobiel & web interface, database for patterns and puzzles, different evaluation metrics.."
+run/main_scene="res://create.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gut" )
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
