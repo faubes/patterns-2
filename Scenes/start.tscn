@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/UI/start.gd" type="Script" id=1]
 
-
 [node name="Start" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,5 +39,10 @@ margin_right = 624.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 100, 50 )
 text = "Create"
+
+[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer"]
+margin_top = 244.0
+margin_right = 624.0
+margin_bottom = 264.0
 [connection signal="pressed" from="VBoxContainer/Guess" to="." method="_on_Guess_pressed"]
 [connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]

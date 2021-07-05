@@ -46,7 +46,7 @@ Two-mode game with:
 2) pattern guessing
 
 Ultimately want to give it a mobiel & web interface, database for patterns and puzzles, different evaluation metrics.."
-run/main_scene="res://Scenes/create.tscn"
+run/main_scene="res://Scenes/start.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
