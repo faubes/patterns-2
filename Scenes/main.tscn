@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/main.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DesignButton" type="Button" parent="."]
+margin_left = 507.363
+margin_top = 209.943
+margin_right = 563.363
+margin_bottom = 229.943
+text = "Design"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSelectMenu" type="MenuButton" parent="."]
+margin_left = 509.695
+margin_top = 258.93
+margin_right = 561.695
+margin_bottom = 278.93
+text = "Guess"

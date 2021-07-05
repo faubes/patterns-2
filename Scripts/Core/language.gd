@@ -10,11 +10,9 @@ func _init(symbols=null):
 		print("New empty language")
 		return
 	if symbols is String:
-		symbols.sort()
 		for i in range(symbols.length()):
-			array.append((symbols[i]))
+			array.append(symbols[i])
 	elif symbols is Array:
-		symbols.sort()
 		for i in range(symbols.size()):
 			if typeof(symbols[i]) == TYPE_INT: # assume unicode if int input
 				array.append(char(symbols[i]))
@@ -24,6 +22,7 @@ func _init(symbols=null):
 	for i in range(array.size()):
 		if (i == 0 or symbol_set_.find(array[i]) == -1): # only add uniques
 			symbol_set_.append(array[i]) # new symbol
+	symbol_set_.sort()
 
 func _equals(other:Language):
 	if size() != other.size():

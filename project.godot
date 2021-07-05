@@ -10,11 +10,23 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Object",
+"class": "Design",
+"language": "GDScript",
+"path": "res://Scripts/Core/design.gd"
+}, {
+"base": "Object",
+"class": "Guess",
+"language": "GDScript",
+"path": "res://Scripts/Core/guess.gd"
+}, {
+"base": "Object",
 "class": "Language",
 "language": "GDScript",
-"path": "res://language.gd"
+"path": "res://Scripts/Core/language.gd"
 } ]
 _global_script_class_icons={
+"Design": "",
+"Guess": "",
 "Language": ""
 }
 
@@ -34,7 +46,7 @@ Two-mode game with:
 2) pattern guessing
 
 Ultimately want to give it a mobiel & web interface, database for patterns and puzzles, different evaluation metrics.."
-run/main_scene="res://create.tscn"
+run/main_scene="res://Scenes/create.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

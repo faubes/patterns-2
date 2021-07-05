@@ -2,7 +2,7 @@ extends Node
 
 onready var board : MarginContainer
 onready var grid : GridContainer
-onready var button = load("res://PatternButton.gd")
+onready var button = load("res://Scripts/UI/PatternButton.gd")
 
 export var SIZE = 6
 var COLS = SIZE

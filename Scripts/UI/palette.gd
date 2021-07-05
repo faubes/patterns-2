@@ -36,8 +36,3 @@ func _ready():
 
 func add_to_palette(s : String):
 	l.add_item(s)
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

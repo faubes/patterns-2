@@ -1,7 +1,7 @@
 extends Control
 
-var B := load("res://board.gd")
-var P := load("res://palette.gd")
+var B := load("res://Scripts/UI/board.gd")
+var P := load("res://Scripts/UI/palette.gd")
 
 func _ready():
 	var screen = MarginContainer.new()

@@ -1,10 +1,10 @@
 extends 'res://addons/gut/test.gd'
 
-var Language = load('res://language.gd')
+var Language = load('res://Scripts/Core/language.gd')
 
 func test_language_size():
-	var _lang = Language.new()
-	assert_gt(1, _lang.size(), "Lang requires at least 2 symbols")
+	var _lang = Language.new("ab")
+	assert_gt(_lang.size(), 1, "Lang requires at least 2 symbols")
 	
 func test_language_well_defined():
 	var _lang = Language.new(["A", "B", "C"])

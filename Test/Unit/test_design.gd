@@ -1,6 +1,6 @@
 extends 'res://addons/gut/test.gd'
 
-var Design = load('res://design.gd')
+var Design = load('res://Scripts/Core/design.gd')
 
 func _test_design_by_array():
 	return Design.new(
@@ -73,3 +73,14 @@ func test_design_is_rectangular():
 	var length_of_first_row = _design.get_row(0).size()
 	for i in range(rows):
 		assert_eq(_design.get_row(i).size(), length_of_first_row, "Designs are rectangular")
+
+# a design must be complete
+	var _incomplete_design = Design.new([
+			[0, 1, 2, 3, 0, 1,],
+			[0, 1, 2, 3, 0, 1,],
+			[0, 1, 2, null, 0, 1,],
+			[0, 1, 2, 3, 0, 1,],
+			[0, 1, 2, 3, 0, 1,],
+			[0, 1, 2, 3, 0, 1,], 
+	])
+	assert_false(_incomplete_design.validate(), "Design must be complete")
