@@ -45,10 +45,17 @@ func test_design_with_null_entry():
 	incomplete_design.get_cell(0,0).value = null
 	assert_false(incomplete_design.validate(), "Design must be complete")
 
+func test_design_equality():
+	var design1 = _test_design()
+	var design2 = _test_design()
+	assert_true(design1.equals(design2), "These designs are identical")
+
 func test_design_save_and_load():
 	var design = _test_design()
 	var filename = design.save() # let's have Design::save() return the filename
-	var design2 = Design.new().load(filename)
+	var design2 = Design.new()
+	var success = design2.load(filename)
+	assert_true(success, "Load worked")
 	assert_true(design.equals(design2), "Designs are the same after save and reload")
 
 # the symbols used in the design are the same as those in the language

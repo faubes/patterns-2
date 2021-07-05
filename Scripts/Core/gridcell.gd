@@ -59,3 +59,6 @@ func guess(arg):
 		
 func equals(other:Gridcell):
 	return value == other.get_value() and guess == other.get_guess() and probed == other.probed()
+
+func to_string() -> String:
+	return var2str(value) + " " + var2str(guess) + " " + var2str(probed)

@@ -30,13 +30,24 @@ func load_guess_array(arr:Array):
 		for j in range(arr[0].size()):
 			guessGrid.get_cell(i,j).guess = arr[i][j]
 
+func clear():
+	load_guess_array(Grid.empty_array(get_dimensions()[0], get_dimensions()[1]))
+
 func probe(coord:Array):
 	assert(coord.size() == 2)
 	return guessGrid.get_cell(coord[0], coord[1]).probe()
 
+func probed(coord:Array):
+	assert(coord.size() == 2)
+	return guessGrid.get_cell(coord[0], coord[1]).probed()
+
 func guess(coord:Array, value):
 	assert(coord.size() == 2)
 	return guessGrid.get_cell(coord[0], coord[1]).guess(value)
+
+func guessed(coord:Array) -> bool:
+	assert(coord.size() == 2)
+	return guessGrid.get_cell(coord[0], coord[1]).guessed()
 
 func get_dimensions():
 	return guessGrid.get_dimensions()
@@ -45,7 +56,7 @@ func score():
 	var score = 0
 	for i in range(guessGrid.get_dimensions()[0]):
 		for j in range(guessGrid.get_dimensions()[1]):
-			if guessGrid.get_cell(i,j).score():
+			var cell_score = guessGrid.get_cell(i,j).score()
+			if cell_score:
 				score += guessGrid.get_cell(i,j).score()
 	return score
-

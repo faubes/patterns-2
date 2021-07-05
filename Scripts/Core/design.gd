@@ -83,7 +83,7 @@ func load(filename) -> bool:
 		var content = str2var(parse_json(file.get_line()))
 		print(content)
 		grid = Grid.new()
-		grid.load(content)
+		grid.gridMap = content
 		content = str2var(file.get_line())
 		print(content)
 		grid.set_dimensions(content)

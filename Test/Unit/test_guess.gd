@@ -16,37 +16,41 @@ static func _test_design():
 			[65, 66, 67, 68, 65, 66,],
 			[65, 66, 67, 68, 65, 66,],
 		])
-		
+
 func _init():
 	design = _test_design()
 	guess = Guess.new(design)
 
 # guess matches dimensions of design
 func test_guess_dimension_same_as_design():
+	_init()
 	assert_eq(guess.get_dimensions(), design.get_dimensions(), "Guess and design have same dimensions")
 
 # guesser can request correct symbol from design
 func test_guess_request_cell():
+	_init()
 	assert_eq(guess.probe([0,0]), "A", "Guesser can sample symbols from design")
 
 # guesser cannot guess on a requested cell
 func test_guess_cannot_guess_requested_cell():
+	_init()
 	guess.probe([0,0])
 	assert_false(guess.guess([0,0], 1), "Guesser cannot guess a probed cell")
 
 # guess can be incomplete; need to request or fill every cell
 func test_guess_empty_incomplete():
-	var _incomplete_guess = Guess.new(design)
-	assert_false(_incomplete_guess.validate(), "Empty guess is not valid")	
+	_init()
+	guess.get_cell(0,0).value = null
+	assert_false(guess.validate(), "Empty guess is not valid")	
 	
 func test_guess_partial_incomplete():
-	var _incomplete_guess = Guess.new(design)
-	_incomplete_guess.guess([0,0], 1) # guess that cell 0,0 has symbol 1
-	assert_false(_incomplete_guess.validate(), "Partial guess is not valid")
+	_init()
+	guess.guess([0,0], 1) # guess that cell 0,0 has symbol 1
+	assert_false(guess.validate(), "Partial guess is not valid")
 
 func test_guess_incomplete():
-	var _incomplete_guess = Guess.new(design)
-	_incomplete_guess.load_guess_array([
+	_init()
+	guess.load_guess_array([
 			[null, "B", "C", "D", "A", "B",],
 			["A", "B", "C", "D", "A", "B",],
 			["A", "B", "C", "D", "A", "B",],
@@ -54,7 +58,9 @@ func test_guess_incomplete():
 			[null, "B", "C", "D", "A", "B",],
 			["A", "B", "C", "D", "A", "B",],
 			])
-	assert_false(_incomplete_guess.validate(), "Partial guess is not valid")
+	assert_false(guess.guessed([0,0]), "Value of guess for cell (0,0) should be null")
+	assert_true(guess.guessed([0,1]), "Value of guess for cell (0,1) should be B")
+	assert_false(guess.validate(), "Partial guess is not valid")
 
 # a complete guess can be validated and scored
 func test_guess_complete():
