@@ -38,3 +38,6 @@ func size():
 func get_symbol(i:int):
 	assert(i>= 0 and i < size())
 	return symbol_set_[i]
+
+func get_symbols():
+	return symbol_set_

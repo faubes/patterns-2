@@ -1,6 +1,7 @@
 extends Control
 
 var create_scene = preload("res://Scenes/create.tscn")
+var test_scene = preload("res://Scenes/TestRunner.tscn")
 #var guess_scene = preload("res://guess.tscn")
 
 var _levels:Array
@@ -12,7 +13,7 @@ func _ready():
 	
 	
 func dir_contents(path):
-	var files:Array
+	var files:Array = []
 	var dir = Directory.new()
 	if dir.open(path) == OK:
 		dir.list_dir_begin(false) # do not include navigational . and .. in results
@@ -37,3 +38,6 @@ func _on_Guess_pressed():
 	#get_tree().change_scene_to(guess_scene)
 	pass # Replace with function body.
 
+
+func _on_Test_pressed():
+	get_tree().change_scene_to(test_scene)

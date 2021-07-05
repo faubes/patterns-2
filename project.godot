@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://Scripts/Core/design.gd"
 }, {
 "base": "Object",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://Scripts/Core/grid.gd"
+}, {
+"base": "Object",
+"class": "Gridcell",
+"language": "GDScript",
+"path": "res://Scripts/Core/gridcell.gd"
+}, {
+"base": "Object",
 "class": "Guess",
 "language": "GDScript",
 "path": "res://Scripts/Core/guess.gd"
@@ -26,6 +36,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Design": "",
+"Grid": "",
+"Gridcell": "",
 "Guess": "",
 "Language": ""
 }
