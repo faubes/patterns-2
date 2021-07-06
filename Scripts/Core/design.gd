@@ -48,6 +48,9 @@ func empty(v:Vector2):
 func get_dimensions() -> Vector2:
 	return grid.get_dimensions()
 
+func get_default_dimensions() -> Vector2:
+	return Vector2(grid.DEFAULT_SIZE, grid.DEFAULT_SIZE)
+
 func get_language():
 	return language
 

@@ -1,38 +1,68 @@
 extends Node
 
-onready var palette : MarginContainer
-onready var l : ItemList
+onready var palette : VSplitContainer
+onready var controlContainer : HSplitContainer
+onready var list : ItemList
+onready var addSymbolLineEdit : LineEdit
+onready var addButton : Button
+onready var removeButton : Button
+
+var Language = load('res://Scripts/Core/language.gd')
+
+var lang : Language
+
+func _init(_l : Language):
+	lang = _l
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	palette = MarginContainer.new()
-
+	
+	palette = VSplitContainer.new()
+	controlContainer = HSplitContainer.new()
 	print(get_viewport().size)
-	palette.set_position(Vector2.ZERO)
+	palette.set_position(Vector2(get_viewport().size.x * 0.75, get_viewport().size.y * 0.25))
 	palette.rect_size = 0.25 * get_viewport().size
-	palette.anchor_left = 0.8
-	palette.anchor_right = 0.8
-	palette.anchor_top = 0.8
-	palette.anchor_bottom = 0.2
-	#palette.margin_left = 20
-	palette.margin_right = 50
-	#palette.margin_top = 20
-	#palette.margin_bottom = -20
 	
-	l = ItemList.new()
-	l.rect_size = 0.3 * get_viewport().size
-	l.add_item("A")
-	l.add_item("B")
-	l.add_item("C")
-	l.add_item("D")
-	l.add_item("E")
-	l.set_size(Vector2(150,150))
+	list = ItemList.new()
+	#list.rect_size = 0.3 * get_viewport().size
+	list.set_size(Vector2(150,150))
 	
-	palette.add_child(l)
-	print(palette)
-	add_child(palette)
-	print("Adding palette")
+	_load_symbols()
+	
+	palette.add_child(list)
+	
+	addSymbolLineEdit = LineEdit.new()
+	
+	addButton = Button.new()
+	addButton.text = "+"
+	addButton.connect("pressed", self, "_onAddButtonPressed")
+	removeButton = Button.new()
+	removeButton.text = "-"
+	removeButton.connect("pressed", self, "_onRemoveButtonPressed")
+	
+	#print(palette)
 
+	palette.add_child(list)
+	palette.add_child(addSymbolLineEdit)
+	controlContainer.add_child(addButton)
+	controlContainer.add_child(removeButton)
+	palette.add_child(controlContainer)
+	
+	print("Adding palette")
+	add_child(palette)
+
+func _load_symbols():
+	if lang:
+		for item in lang.get_symbols():
+			add_to_palette(item)
+
+func _onAddButtonPressed():
+	var s = addSymbolLineEdit.text
+	if (s.length() == 1):
+		add_to_palette(s)
+
+func _onRemoveButtonPressed():
+	pass
 
 func add_to_palette(s : String):
-	l.add_item(s)
+	list.add_item(s)

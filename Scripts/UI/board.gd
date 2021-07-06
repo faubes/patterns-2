@@ -5,13 +5,15 @@ onready var grid : GridContainer
 onready var button = load("res://Scripts/UI/PatternButton.gd")
 
 var Design = load('res://Scripts/Core/design.gd')
-var design:Design
+var design : Design
 
+func _init(_d : Design):
+	design = _d
+	
 func _ready():
-	design = Design.new()
 	board = MarginContainer.new()
 	grid = GridContainer.new()
-	grid.set_columns(design.get_dimensions().y)
+	grid.set_columns(design.get_default_dimensions().y)
 	board.add_child(grid)
 	get_parent().add_child(board)
 	
@@ -33,6 +35,6 @@ func _ready():
 			for j in range(design.get_dimensions().y):
 				var b = button.new()
 				b.add_to_group("Persist")
-				b.text = str(i) + " " + str(j)
+				b.text = ""
 				b.position = Vector2(i,j)
 				grid.add_child(b)

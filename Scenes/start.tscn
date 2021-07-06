@@ -23,10 +23,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Guess" type="Button" parent="VBoxContainer"]
+[node name="Create" type="Button" parent="VBoxContainer"]
 margin_top = 121.0
 margin_right = 624.0
 margin_bottom = 171.0
+rect_min_size = Vector2( 100, 50 )
+text = "Create"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Guess" type="Button" parent="VBoxContainer"]
+margin_top = 175.0
+margin_right = 624.0
+margin_bottom = 225.0
 rect_min_size = Vector2( 100, 50 )
 text = "Guess"
 __meta__ = {
@@ -34,27 +44,15 @@ __meta__ = {
 }
 
 [node name="Test" type="Button" parent="VBoxContainer"]
-margin_top = 175.0
+margin_top = 229.0
 margin_right = 624.0
-margin_bottom = 225.0
+margin_bottom = 279.0
 rect_min_size = Vector2( 100, 50 )
 text = "Test"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Create" type="Button" parent="VBoxContainer"]
-margin_top = 229.0
-margin_right = 624.0
-margin_bottom = 279.0
-rect_min_size = Vector2( 100, 50 )
-text = "Create"
-
-[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer"]
-margin_top = 244.0
-margin_right = 624.0
-margin_bottom = 264.0
+[connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]
 [connection signal="pressed" from="VBoxContainer/Guess" to="." method="_on_Guess_pressed"]
 [connection signal="pressed" from="VBoxContainer/Test" to="." method="_on_Guess_pressed"]
 [connection signal="pressed" from="VBoxContainer/Test" to="." method="_on_Test_pressed"]
-[connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]
