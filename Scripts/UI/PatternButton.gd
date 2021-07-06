@@ -1,20 +1,17 @@
 extends Button
 
+var Gridcell = load('res://Scripts/Core/gridcell.gd')
+
+var cell:Gridcell
 var position : Vector2
-export var MIN_SIZE = 25
 
-enum state {
-	blank = 0,
-	filled = 1,
-}
 
+export var MIN_BUTTON_SIZE = 45
 
 
 # Called when the obj constructed
-func _init():
+func _init(c:Gridcell=null):
 	print("Added new button")
-	rect_min_size = Vector2(MIN_SIZE, MIN_SIZE)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if c:
+		cell = c
+	rect_min_size = Vector2(MIN_BUTTON_SIZE, MIN_BUTTON_SIZE)

@@ -11,6 +11,7 @@ func _ready():
 	design = Design.new()
 	board = MarginContainer.new()
 	grid = GridContainer.new()
+	grid.set_columns(design.get_dimensions().y)
 	board.add_child(grid)
 	get_parent().add_child(board)
 	
@@ -27,10 +28,11 @@ func _ready():
 	board.margin_top = 20
 	board.margin_bottom = -20
 	
-	for i in range(design.get_dimensions().x):
-		for j in range(design.get_dimensions().y):
-			var b = button.new()
-			b.add_to_group("Persist")
-			b.text = str(i) + " " + str(j)
-			b.position = Vector2(i,j)
-			grid.add_child(b)
+	if design.get_dimensions():
+		for i in range(design.get_dimensions().x):
+			for j in range(design.get_dimensions().y):
+				var b = button.new()
+				b.add_to_group("Persist")
+				b.text = str(i) + " " + str(j)
+				b.position = Vector2(i,j)
+				grid.add_child(b)

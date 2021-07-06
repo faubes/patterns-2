@@ -5,6 +5,8 @@ var GridCell = load('res://Scripts/Core/gridcell.gd')
 
 var gridMap = {} # use a hashmap; easier to import/export
 var dimensions:Vector2
+var DEFAULT_SIZE = 6 # default 6x6 grid
+
 
 static func empty_array(dim:Vector2):
 	var arr = []
@@ -18,8 +20,7 @@ static func empty_array(dim:Vector2):
 
 func _init(arr:Array=[]):
 	if !arr.empty():
-		dimensions = _infer_2d_dimensions(arr)
-		
+		dimensions = _infer_2d_dimensions(arr)		
 		for i in range(dimensions.x):
 			assert(arr[i].size() == dimensions.y, "Init grid with malformed array")
 			for j in range(dimensions.y):
@@ -28,6 +29,12 @@ func _init(arr:Array=[]):
 					gridMap[key] = GridCell.new(arr[i][j])
 				else:
 					gridMap[key] = GridCell.new()
+	else: #default to empty 6x6
+		dimensions = Vector2(DEFAULT_SIZE, DEFAULT_SIZE)
+		for i in range(dimensions.x):
+			for j in range(dimensions.y):
+				var key:Vector2 = coord_key(i,j)
+				gridMap[key] = GridCell.new()
 	
 func _infer_2d_dimensions(arr:Array=[]) -> Vector2:
 	var d := Vector2.ZERO

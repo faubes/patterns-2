@@ -14,8 +14,10 @@ var designer_id:String
 func _init(arg=null):
 	if arg is Array:
 		grid = Grid.new(arg)
-		_infer_language()
-		id = _new_id()
+	elif arg == null:
+		grid = Grid.new()
+	_infer_language()
+	id = _new_id()	
 
 func _infer_language():
 	language = Language.new(get_symbols_used())
