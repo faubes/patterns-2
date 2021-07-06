@@ -3,6 +3,8 @@ extends Control
 var B := load("res://Scripts/UI/board.gd")
 var P := load("res://Scripts/UI/palette.gd")
 
+var palette_node
+var board_node
 func _ready():
 	var screen = MarginContainer.new()
 	screen.anchor_top = 0.5
@@ -14,11 +16,11 @@ func _ready():
 	#screen.margin_bottom = 0.2*get_viewport_rect().size.y
 	#screen.margin_right = 0.2*get_viewport_rect().size.x
 	add_child(screen)
-	var board_node = B.new()
+	board_node = B.new()
 	screen.add_child(board_node)	
-	var test = board_node._save()
-	print(test)
-	var palette_node = P.new()
+	#var test = board_node._save()
+	#print(test)
+	palette_node = P.new()
 	screen.add_child(palette_node)
 	
 func on_select_char(_event):

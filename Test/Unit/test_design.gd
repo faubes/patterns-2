@@ -19,7 +19,7 @@ func test_design_as_array():
 
 func test_design_dimensions():
 	var design = _test_design()
-	assert_eq(design.get_dimensions(), [6,6], "Design 1 has dimensions 6 by 6")
+	assert_eq(design.get_dimensions(), Vector2(6,6), "Design 1 has dimensions 6 by 6")
 
 func test_design_symbols():
 	var design = _test_design()
@@ -42,7 +42,7 @@ func test_design_well_defined():
 # a design must be complete to pass validation
 func test_design_with_null_entry():
 	var incomplete_design = _test_design()
-	incomplete_design.get_cell(0,0).value = null
+	incomplete_design.get_cell(Vector2(0,0)).value = null
 	assert_false(incomplete_design.validate(), "Design must be complete")
 
 func test_design_equality():

@@ -4,11 +4,12 @@ class_name Grid
 var GridCell = load('res://Scripts/Core/gridcell.gd')
 
 var gridMap = {} # use a hashmap; easier to import/export
-var m : int # dimensions of grid
-var n : int
+var dimensions:Vector2
 
-static func empty_array(m : int, n : int):
+static func empty_array(dim:Vector2):
 	var arr = []
+	var m = dim.x
+	var n = dim.y
 	arr.resize(m)
 	for i in range(m):
 		arr[i] = []
@@ -17,63 +18,77 @@ static func empty_array(m : int, n : int):
 
 func _init(arr:Array=[]):
 	if !arr.empty():
-		m = arr.size()
-		assert(m > 0, "Init grid with empty array")
-		n = arr[0].size()
-		assert (n > 0, "Init grid with 1d array?")
+		dimensions = _infer_2d_dimensions(arr)
 		
-		for i in range(m):
-			assert(arr[i].size() == n, "Init grid with malformed array")
-			for j in range(n):
-				var key:String = coord_key(i,j)
+		for i in range(dimensions.x):
+			assert(arr[i].size() == dimensions.y, "Init grid with malformed array")
+			for j in range(dimensions.y):
+				var key:Vector2 = coord_key(i,j)
 				if arr[i][j] != null:
 					gridMap[key] = GridCell.new(arr[i][j])
 				else:
 					gridMap[key] = GridCell.new()
 	
+func _infer_2d_dimensions(arr:Array=[]) -> Vector2:
+	var d := Vector2.ZERO
+	d.x = arr.size()
+	assert(d.x > 0, "Init grid with empty array")
+	d.y = arr[0].size()
+	assert (d.y > 0, "Init grid with 1d array?")
+	return d
+		
 func well_defined():
-	if m < 2 or n < 2:
+	if dimensions.x < 2 or dimensions.y < 2:
+		assert(false, "Grid too small")
 		return false
-	if gridMap.size() != m * n:
-		return false
-	for i in range(m):
-		for j in range(n):
-			if gridMap[coord_key(i,j)] == null:
+	if gridMap.size() != dimensions.x * dimensions.y:
+		assert(false, "Grid not well defined: incorrect number of cells")
+		return false 
+	for i in range(dimensions.x):
+		for j in range(dimensions.y):
+			if gridMap[Vector2(i,j)] == null:
 				return false
 	return true
 
-func set_dimensions(arr:Array):
-	assert(arr.size() == 2, "grids are 2d")
-	m = arr[0]
-	n = arr[1]
-
+func set_dimensions(d:Vector2):
+	dimensions = d
+	
 func load(map:Dictionary):
 	gridMap = map
 
-func coord_key(i : int, j : int) -> String:
-	return str(i) + "," + str(j)
+func coord_key(i : int, j : int) -> Vector2:
+	return Vector2(i,j)
 
-func get_cell(i : int, j : int):
-	return gridMap[coord_key(i,j)]
+func get_cell(v:Vector2):
+	return gridMap[v]
 
-func get_cell_by_key(key : String):
-	return gridMap[key]
+func get_value(v:Vector2):
+	return gridMap[v].get_value()
 
-func get_dimensions():
-	return [m, n]
+func guess(v:Vector2, val):
+	return gridMap[v].guess(val)
+
+func guessed(v:Vector2):
+	return gridMap[v].guessed()
+
+func score(v:Vector2):
+	return gridMap[v].score()
+
+func get_dimensions() -> Vector2:
+	return dimensions
 	
 func equals(other:Grid):
 	if get_dimensions() != other.get_dimensions():
 		return false
-	for i in range(m):
-		for j in range(n):
-			if !get_cell(i,j).equals(other.get_cell(i,j)):
+	for i in range(dimensions.x):
+		for j in range(dimensions.y):
+			if !get_cell(Vector2(i,j)).equals(other.get_cell(Vector2(i,j))):
 				return false
 	return true
 
 func filled():
-	for i in range(m):
-		for j in range(n):
-			if get_cell(i,j).get_value() == null:
+	for i in range(dimensions.x):
+		for j in range(dimensions.y):
+			if get_cell(Vector2(i,j)).get_value() == null:
 				return false
 	return true

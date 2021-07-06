@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Core/gridcell.gd"
 }, {
-"base": "Object",
+"base": "Design",
 "class": "Guess",
 "language": "GDScript",
 "path": "res://Scripts/Core/guess.gd"

@@ -1,5 +1,4 @@
-class_name Design
-extends Object
+class_name Design extends Object
 
 var Grid = load('res://Scripts/Core/grid.gd')
 var Gridcell = load('res://Scripts/Core/gridcell.gd')
@@ -30,15 +29,21 @@ func get_symbols_used():
 	var arr = []
 	for i in range(grid.get_dimensions()[0]):
 		for j in range(grid.get_dimensions()[1]):
-			var val = grid.get_cell(i, j).get_value()
+			var val = grid.get_value(Vector2(i,j))
 			if (val and -1 == arr.find(val)):
 				arr.append(val)
 	return arr
 
-func get_cell(i : int, j : int) -> Gridcell:
-	return grid.get_cell(i,j)
+func get_cell(v:Vector2) -> Gridcell:
+	return grid.get_cell(v)
 
-func get_dimensions():
+func get_value(v:Vector2):
+	return grid.get_cell(v).get_value()
+
+func empty(v:Vector2):
+	return grid.get_cell(v).empty()
+
+func get_dimensions() -> Vector2:
 	return grid.get_dimensions()
 
 func get_language():
@@ -72,7 +77,7 @@ func save() -> String:
 	var filename:String = "user://design" + get_id() + ".dat"
 	file.open(filename, File.WRITE)
 	file.store_line(to_json(var2str(grid.gridMap)))
-	file.store_line(var2str([grid.m, grid.n]))
+	file.store_line(var2str(grid.get_dimensions()))
 	file.close()
 	return filename
 
